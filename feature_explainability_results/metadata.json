@@ -1,0 +1,63 @@
+{
+  "input": "synthetic_stage1_stage2_dataset.csv",
+  "feature_set": "full",
+  "n_features": 28,
+  "features": [
+    "questionnaire_latency_mean",
+    "questionnaire_latency_sd",
+    "questionnaire_interval_mean",
+    "questionnaire_interval_sd",
+    "social_notification_latency_mean",
+    "social_notification_latency_sd",
+    "ambient_light_sd",
+    "fitbit_steps_active",
+    "active_session_duration",
+    "new_apps_added",
+    "scroll_interval_sd",
+    "tap_interval_sd",
+    "dwell_time_sd",
+    "idle_interval_sd",
+    "session_fragmentation",
+    "pst_fixation_duration",
+    "ast_saccade_time_max",
+    "mgst_saccade_degree_total",
+    "mgst_saccade_degree_mean",
+    "mgst_saccade_time_max",
+    "mgst_fixation_time_max",
+    "mgst_fixation_mean",
+    "mgst_saccade_latency_total",
+    "mgst_saccade_duration",
+    "cdt_saccade_degree_sd",
+    "stroop_saccade_degree_mean",
+    "stroop_screen_duration_mean",
+    "stroop_saccade_latency_total"
+  ],
+  "label_column": "label",
+  "positive_class": "1",
+  "n_splits": 30,
+  "test_size": 0.3,
+  "random_seed": 42,
+  "permutation_repeats": 30,
+  "permutation_scoring": "roc_auc",
+  "logistic_regression_importance": "Standardized model coefficients from a pipeline using median imputation and StandardScaler. Ranking uses mean absolute coefficient across the repeated splits; plots show the mean signed coefficient.",
+  "tree_importance": "Permutation importance computed on each held-out test split. Feature importance is the decrease in ROC AUC after shuffling the feature. Summary values aggregate importance across splits.",
+  "models": {
+    "Logistic Regression": {
+      "class_weight": "balanced",
+      "solver": "liblinear",
+      "max_iter": 5000,
+      "random_state": 0
+    },
+    "Random Forest": {
+      "n_estimators": 100,
+      "class_weight": "balanced"
+    },
+    "XGBoost": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "objective": "binary:logistic",
+      "eval_metric": "logloss"
+    }
+  }
+}

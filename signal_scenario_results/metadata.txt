@@ -1,0 +1,72 @@
+{
+  "input": "synthetic_stage1_stage2_dataset.csv",
+  "label_col": "label",
+  "positive_label": "1",
+  "stage1_cols": [
+    "questionnaire_latency_mean",
+    "questionnaire_latency_sd",
+    "questionnaire_interval_mean",
+    "questionnaire_interval_sd",
+    "social_notification_latency_mean",
+    "social_notification_latency_sd",
+    "ambient_light_sd",
+    "fitbit_steps_active",
+    "active_session_duration",
+    "new_apps_added",
+    "scroll_interval_sd",
+    "tap_interval_sd",
+    "dwell_time_sd",
+    "idle_interval_sd",
+    "session_fragmentation"
+  ],
+  "stage2_cols": [
+    "pst_fixation_duration",
+    "ast_saccade_time_max",
+    "mgst_saccade_degree_total",
+    "mgst_saccade_degree_mean",
+    "mgst_saccade_time_max",
+    "mgst_fixation_time_max",
+    "mgst_fixation_mean",
+    "mgst_saccade_latency_total",
+    "mgst_saccade_duration",
+    "cdt_saccade_degree_sd",
+    "stroop_saccade_degree_mean",
+    "stroop_screen_duration_mean",
+    "stroop_saccade_latency_total"
+  ],
+  "scenario_strengths": {
+    "weak": 0.3,
+    "medium": 0.6,
+    "strong": 1.0
+  },
+  "thresholds": [
+    [
+      0.2,
+      0.8
+    ],
+    [
+      0.3,
+      0.7
+    ],
+    [
+      0.4,
+      0.6
+    ]
+  ],
+  "n_repeats": 30,
+  "test_size": 0.3,
+  "random_seed": 42,
+  "models": [
+    "Logistic Regression",
+    "Random Forest",
+    "XGBoost"
+  ],
+  "notes": [
+    "Same stratified split indices reused across models/configurations/scenarios.",
+    "Stage-1 scenarios use symmetric mean scaling with one label-independent shared residual distribution and pooled feature scale.",
+    "Originally non-negative Stage-1 features are shifted, not clipped, if generated values cross zero.",
+    "Stage-2 features are unchanged across signal scenarios.",
+    "Cascade AUC uses p1 for confident cases and p2 for uncertain cases.",
+    "all_test_predictions.csv stores y_true, y_score, and y_pred for ROC/PR/confusion-matrix analysis."
+  ]
+}
